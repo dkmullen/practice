@@ -110,7 +110,7 @@ steps(5);
 
 // Pyramid ----------------------------9
 function pyramid(n) {
-  console.log('9.')
+  console.log('9.');
   let midpoint = Math.floor((n*2-1)/2);
   for (let row = 0; row < n; row++) {
     let step = '';
@@ -150,3 +150,58 @@ function fizzBuzz(n) {
 // fizzBuzz(46);
 
 // Matrix ----------------------------12
+
+function matrix(n) {
+  // Make an empty array of empty arrays. We can assign values to indicies in an array
+  // that have not been initialized -ie arr[3] = "hi", and this will be assigned
+  // to index 3 even though the rest of the array is empty
+  const results = [];
+  for (let i = 0; i < n; i++) {
+    results.push([]);
+  }
+
+  let counter = 1,
+    startColumn = 0,
+    endColumn = n - 1,
+    startRow = 0,
+    endRow = n - 1;
+
+  // Once cols and rows meet up, we are done
+  while (startColumn <= endColumn && startRow <= endRow) {
+
+    // top row
+    for (let i = startColumn; i <= endColumn; i++) {
+      results[startRow][i] = counter;
+      counter++;
+    }
+    startRow++; // 1
+
+    // right col except first row
+    for (let i = startRow; i <= endRow; i++) {
+      results[i][endColumn] = counter;
+      counter++;
+    }
+    endColumn--; // 1
+
+    // // bottom row excluding last col
+    for (let i = endColumn; i >= startColumn; i--) {
+      results[endRow][i] = counter;
+      counter++;
+    }
+    endRow--; // 1
+
+    // // A for-loop for the left col excluding last and first row
+    for (let i = endRow; i >= startRow; i--) {
+      results[i][startColumn] = counter;
+      counter++;
+    }
+    startColumn++;
+  }
+
+  // 123
+  // 674
+  // 985
+
+  console.log(results);
+}
+matrix(3);
