@@ -8,7 +8,9 @@ function reverse1(str) {
   }
   return rev; // console log it for test
 }
-
+/* Runtime complexity for Reverse - linear or 1 to 1; each add. char = one
+    more operation -  a one-to-one relationship
+*/
 // Or...
 function reverse(str) {
   console.log('1. ' + str.split('').reverse().join(''));
@@ -107,6 +109,10 @@ function steps(n) {
   }
 }
 steps(5);
+/* Runtime complexity for Steps: n^2 (n squared) or quadratic;
+   Each n produces n*n operations, so incrementing n squares the num of
+   operations
+*/
 
 // Pyramid ----------------------------9
 function pyramid(n) {
