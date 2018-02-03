@@ -4,7 +4,7 @@
 - **Linear time [n]:** Iterating over all elements in the data. A loop from 0 to array.length, for example. Adding one element adds one cycle.
 - **Quasilinear Time [n * log(n)]:** You have this if doubling the number of elements does not double the amount of work. Assume this for **sorting operations.**
 - **Quadratic time [n^2]:** Every element in the collection has to be compared with every other. The 'handshake problem'. Adding an element squares the number of operations.
-- **Exponential time [2^n]:** If you add a single element, the processing power required doubles. Almost always a more efficient way.
+- **Exponential time [2^n]:** If you add a single element, the processing power required doubles. Almost always a more efficient way. Example = Fibonacci recursive solution.
 
 Big O notation: O(n), O(log(n)), etc.
 

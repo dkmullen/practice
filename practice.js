@@ -211,3 +211,66 @@ function matrix(n) {
   console.log(results);
 }
 matrix(3);
+
+// Fibonacci Sequence ---------------------------------
+
+function fib1(n) {
+  let fibo = [0, 1];
+  for (let i = 2; i <= n; i++) {
+    fibo.push(fibo[fibo.length - 1] + fibo[fibo.length - 2]);
+    // or fibo.push(fibo[i - 1] + fibo[i - 2]);
+  }
+  return fibo[n];
+
+}
+
+// Using recursion
+function fib2(n) {
+  if (n < 2) return n;
+  return fib2(n - 1) + fib2(n - 2);
+}
+
+/*
+In the recursive solution, fib(5) actuall calls fib(4) and fib(3) which in
+turn call fib(3) and fib(2) AND fib(2) and fib(1), etc. Notice: That last fib(1)
+returns a 1 due to the first return statement (if n < 2...) and you finally get
+enough ones to add up to the fibonacci number you are looking for!
+
+The recursive solution is guilty of Exponential runtime complexity! The number
+of times fib() runs rapidly expands with each addition to n.
+*/
+
+// To fix that...
+
+// memoize is a generic function to cache the results of any function and
+// return those results instead of running the function repeatedly, as in fib.
+
+function memoize(fn) { // takes a function as an arg
+  const cache = {};
+  // ...args is for an undetermined number of args. fib always has one, but for other functions...
+  return function(...args) { // this anon func becomes fib()
+    // check the cache - if function has already run, just return results
+    if(cache[args]) { // if the key already exists for the current arg
+      return cache[args]; // return the value of that key - ie, key 7, val 13
+    }
+    // Otherwise, if function hasn't been called yet for the given args...
+    // 'apply' calls a function with a given 'this' value and an array of args
+    const result = fn.apply(this, args); // runs fib() for the previously unused arg
+    // cache the result and return it.
+    cache[args] = result;
+    return result;
+  };
+}
+/* Note that the cache stores a key (n) and a value (the fibo num at position n),
+  For example: 6:8 or 7:13
+*/
+
+// Using recursion AND memoize
+let fib = function (n) {
+  if (n < 2) return n;
+  return fib(n - 1) + fib(n - 2); // these call the reassigned fib, below
+};
+
+fib = memoize(fib);
+
+fib(7);
