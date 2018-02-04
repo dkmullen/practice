@@ -55,3 +55,34 @@ two.add('c');
 two.add('b');
 
 weave(one, two);
+
+// Stack -----------------------
+
+// Very similar to queue except last in first out, like a stack where you add
+// and remove stuff from the top.
+
+class Stack {
+  constructor() {
+    this.data = [];
+  }
+
+  push(record) {
+    this.data.push(record); // adds record to the array at the end
+  }
+
+  pop() {
+    return this.data.pop(); // Removes the last record
+  }
+
+  peek() {
+    return this.data[this.data.length - 1];
+  }
+}
+
+const s = new Stack();
+s.push(1);
+s.push(2);
+s.push(3);
+
+s.pop(); // Removers and returns the last item
+s.peek(); // Returns the last record without removing it
