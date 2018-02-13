@@ -54,6 +54,7 @@ class LinkedList {
       counter++;
       // next will be either null or the next node
       node = node.next;
-    }  
+    } 
+    return counter;
   }
 }
