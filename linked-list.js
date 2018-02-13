@@ -44,4 +44,16 @@ class LinkedList {
     // becomes 'next' as per the Node constructor, above
     this.head = new Node(data, this.head);
   }
+  
+  size() {
+    let counter = 0;
+    let node = this.head;
+    
+    // If there is a head node...
+    while (node) {
+      counter++;
+      // next will be either null or the next node
+      node = node.next;
+    }  
+  }
 }
