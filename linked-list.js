@@ -89,9 +89,34 @@ class LinkedList {
       this.head = this.head.next;
     }
   }
+
+  removeLast() {
+    if(!this.head) { // if zero nodes...
+      return;
+    }
+    if(!this.head.next) { // if only one node...
+      this.head = null;
+      return;
+    }
+    // if two or more nodes
+    let previous = this.head; // ie, the first node
+    let node = this.head.next; // ie, the second node
+
+    // The loop runs only if node 2 points to another node
+    while (node.next) {
+      previous = node; // advance previous one node
+      node = node.next; // and advance node one node
+    }
+    // When you get to the last node, make previous the last node by
+    // changing its 'next' ref
+    previous.next = null;
+  }
 }
 
 // A little data to test...
 let myList = new LinkedList();
-myList.insertFirst('Hello');
-console.log(myList.getFirst());
+myList.insertFirst('red');
+// myList.insertFirst('blue');
+// myList.insertFirst('green');
+myList.removeLast();
+console.log(myList);
