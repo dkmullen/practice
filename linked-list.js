@@ -11,14 +11,16 @@ const nodeTwo = {
 nodeOne.next = nodeTwo;
 
 /*
-The above produces: { data: 123, next: { data: 456 } }
+console.log(nodeOne) produces: { data: 123, next: { data: 456 } }
 */
 
-console.log(nodeOne);
+// console.log(nodeOne);
 
 /*
 Link list: Ordered collection of data, made up of nodes. Each node contains some
 data plus a reference to the next node.
+
+Each node has a 'data bucket' and a ref to next.
 
 Head node: First in list
 Tail node: Last, and can be identified by the fact that it has no ref to next node
@@ -44,17 +46,26 @@ class LinkedList {
     // becomes 'next' as per the Node constructor, above
     this.head = new Node(data, this.head);
   }
-  
+
   size() {
     let counter = 0;
     let node = this.head;
-    
+
     // If there is a head node...
     while (node) {
       counter++;
       // next will be either null or the next node
       node = node.next;
-    } 
+    }
     return counter;
   }
+
+  getFirst() {
+    return this.head;
+  }
 }
+
+// A little data to test...
+let myList = new LinkedList();
+myList.insertFirst('Hello');
+console.log(myList.getFirst());
