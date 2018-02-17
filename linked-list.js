@@ -111,12 +111,87 @@ class LinkedList {
     // changing its 'next' ref
     previous.next = null;
   }
+
+  // Building the method independent of other methods
+  insertLast2(data) {
+    if(!this.head) {
+      this.head = new Node(data, null);
+    }
+    let node = this.head;
+    while (node.next) {
+      node = node.next;
+    }
+    node.next = new Node(data, null);
+  }
+
+// Using the previously-created getLast()
+  insertLast(data) {
+    const last = this.getLast();
+    if (last) {
+      last.next = new Node(data); // Remember 'next' is 'null' by default in our constructor
+    } else {
+      this.head = new Node(data);
+    }
+  }
+
+  getAt(index) {
+    let counter = 0;
+    let node = this.head;
+
+    // 'while node' handles an index that is out of range. Could call size() to
+    // ensure we're in range but size iterates over the whole list, and then
+    // if we're in range, we have to start interating again.
+    while (node) {
+      if (counter === index) {
+        return node;
+      }
+      counter++;
+      node = node.next;
+    }
+    return null;
+  }
+
+  removeAt(index) {
+    if (!this.head) {
+      return null;
+    }
+    if (index === 0 && !this.head.next) {
+      this.head = null;
+      return;
+    }
+    let previous = this.getAt(index - 1);
+    previous.next = previous.next.next;
+  }
+
+  insertAt(data, index) {
+    if (index === 0) { // Takes care of an empty list OR one with links
+      return this.insertFirst(data);
+    }
+
+    let node = this.getAt(index);
+    let previous = this.getAt(index - 1);
+    let newNode = new Node(data, node); // Set to point at the node that
+                                        // previously held the index
+    if (!node) { // If index is out of range
+      this.insertLast(data); // just put it at the end
+      return;
+    }
+    // Barring the above edge case, point 'previous' to the new node
+    previous.next = newNode;
+  }
+
+
+
 }
 
 // A little data to test...
 let myList = new LinkedList();
 myList.insertFirst('red');
-// myList.insertFirst('blue');
-// myList.insertFirst('green');
-myList.removeLast();
-console.log(myList);
+myList.insertFirst('blue');
+myList.insertFirst('green');
+myList.insertFirst('orange');
+myList.insertFirst('white');
+// myList.removeLast();
+console.log(myList.getAt(2));
+myList.removeAt(1);
+console.log(myList.getAt(2));
