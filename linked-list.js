@@ -63,6 +63,32 @@ class LinkedList {
   getFirst() {
     return this.head;
   }
+
+  getLast() {
+    if(!this.head) {
+      return null;
+    }
+    let node = this.head;
+    while (node.next) {
+      node = node.next;
+    }
+    return node;
+  }
+
+  /*
+  For clear(), remember that without the head pointing to next, there is no
+  linked list, so no need to delete the nodes. Just disconnect them.
+  */
+  clear() {
+    this.head = null;
+  }
+
+  // Likewise, 'remove' the first node simply by pointing the head to the next one
+  removeFirst() {
+    if (this.head) {
+      this.head = this.head.next;
+    }
+  }
 }
 
 // A little data to test...
