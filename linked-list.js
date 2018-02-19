@@ -180,6 +180,24 @@ class LinkedList {
     previous.next = newNode;
   }
 
+  forEach(func) {
+    let node = this.head;
+    while (node) {
+      func(node);
+      node = node.next;
+    }
+  }
+
+  // Some built-in types have their own iterator. Object doesn't. We can set
+// it up like this
+*[Symbol.iterator]() {
+  let node = this.head;
+  while (node) {
+    yield node;
+    node = node.next;
+  }
+}
+
 
 
 }
@@ -191,7 +209,11 @@ myList.insertFirst('blue');
 myList.insertFirst('green');
 myList.insertFirst('orange');
 myList.insertFirst('white');
-// myList.removeLast();
-console.log(myList.getAt(2));
-myList.removeAt(1);
-console.log(myList.getAt(2));
+
+myList.forEach((node, index) => {
+  console.log(node, 'index');
+});
+// // myList.removeLast();
+// console.log(myList.getAt(2));
+// myList.removeAt(1);
+// console.log(myList.getAt(2));
