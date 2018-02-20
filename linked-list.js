@@ -190,17 +190,17 @@ class LinkedList {
 
   // Some built-in types have their own iterator. Object doesn't. We can set
 // it up like this
+/* This generator below allows us to use a for of loop to iterate thru the linked list
+*/
 *[Symbol.iterator]() {
   let node = this.head;
-  while (node) {
-    yield node;
-    node = node.next;
+    while (node) {
+      yield node;
+      node = node.next;
+    }
   }
-}
 
-
-
-}
+} // End of the LinkedList class
 
 // A little data to test...
 let myList = new LinkedList();
@@ -217,3 +217,14 @@ myList.forEach((node, index) => {
 // console.log(myList.getAt(2));
 // myList.removeAt(1);
 // console.log(myList.getAt(2));
+
+// Generators
+  function *list() { // generators are marked w/an *
+    yield 1; // When a generator hits a yield statement, it returns the value & pauses
+    yield 2;
+  }
+
+const generator = list();
+generator.next(); // returns value: 1, done: false
+generator.next(); // returns v 2 done false
+generator.next(); // returns done: true
