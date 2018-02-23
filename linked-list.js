@@ -228,3 +228,69 @@ const generator = list();
 generator.next(); // returns value: 1, done: false
 generator.next(); // returns v 2 done false
 generator.next(); // returns done: true
+
+
+/* Find the midpoint of a list
+This function sets 'slow'and 'fast' to the first node, then advances slow
+by one and fast by two. As soon as fast doesn't have a node in front of it, or
+one after that, it can be assumed that slow is pointing at the middle one!
+This two pointer strategy works for lots of linked-list problems.
+*/
+function midpoint(list) {
+  let slow = list.head;
+  let fast = list.head;
+  while (fast.next && fast.next.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+  return slow;
+}
+
+/* Detect a 'circular' list, one with the last node incorrectly pointing to any
+other node.
+Likewise, this one looks for the end with fast, but if both end up pointing
+at the same node, it is a circular list, one without an end, which will
+mess up all our other functions.
+*/
+function circular(list) {
+  let slow = list.head;
+  let fast = list.head;
+  while (fast.next && fast.next.next) {
+    fast = fast.next.next;
+    slow = slow.next;
+    if (fast === slow) {
+      return true;
+    }
+  }
+  return false;
+
+}
+
+// --- Directions
+// Given a linked list, return the element n spaces
+// from the last node in the list.  Do not call the 'size'
+// method of the linked list.  Assume that n will always
+// be less than the length of the list.
+// --- Examples
+//    const list = new List();
+//    list.insertLast('a');
+//    list.insertLast('b');
+//    list.insertLast('c');
+//    list.insertLast('d');
+//    fromLast(list, 2).data // 'b'
+
+// Another two var solution
+function fromLast(list, n) {
+  let slow = list.head; // set both to head
+  let fast = list.head;
+
+  for (let i = 0; i < n; i++) {
+    fast = fast.next; // run fast ahead n times
+  }
+  // Then advance them one at a time till fast hits the end, and slow is the one!
+  while (fast.next) {
+    fast = fast.next;
+    slow = slow.next;
+  }
+  return slow;
+}
