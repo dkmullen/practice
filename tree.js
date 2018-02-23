@@ -59,3 +59,56 @@ class Tree {
     }
   }
 }
+
+// --- Directions
+// Given the root node of a tree, return
+// an array where each element is the width
+// of the tree at each level.
+// --- Example
+// Given:
+//     0
+//   / |  \
+// 1   2   3
+// |       |
+// 4       5
+// Answer: [1, 3, 2]
+
+// My solution
+function levelWidth2(root) {
+  let arr = [root, 's']; // The 's' is an end-of-line indicator
+  let counters = [];
+  let counter = 0;
+  while (arr.length) {
+    const node = arr.shift(); // pull off first node
+    if (node !== 's') {
+      arr.push(...node.children); // add its children to the end of the arr
+      counter++;
+    } else { // if we get the 's'...
+      counters.push(counter); // add counter to counters arr...
+      counter = 0; // and reset it
+      if (arr.length) { // check to see if arr is empty or else an infinite loop
+      arr.push(node);
+      }
+    }
+  }
+  return counters;
+}
+
+
+// Instructor's solution
+function levelWidth(root) {
+  const arr = [root, 's'];
+  const counters = [0];
+
+  while (arr.length > 1) {
+    const node = arr.shift();
+    if (node === 's') {
+      counters.push(0);
+      arr.push('s');
+    } else {
+      arr.push(...node.children);
+      counters[counters.length - 1]++;
+    }
+  }
+  return counters;
+}
