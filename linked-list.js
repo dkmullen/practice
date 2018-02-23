@@ -287,6 +287,7 @@ function fromLast(list, n) {
   for (let i = 0; i < n; i++) {
     fast = fast.next; // run fast ahead n times
   }
+  // Could also say: while (n > 0) { fast = fast.next; n-- }
   // Then advance them one at a time till fast hits the end, and slow is the one!
   while (fast.next) {
     fast = fast.next;
