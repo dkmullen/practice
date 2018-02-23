@@ -112,3 +112,62 @@ function levelWidth(root) {
   }
   return counters;
 }
+
+// --- Directions
+// 1) Implement the Node class to create
+// a binary search tree.  The constructor
+// should initialize values 'data', 'left',
+// and 'right'.
+// 2) Implement the 'insert' method for the
+// Node class.  Insert should accept an argument
+// 'data', then create an insert a new node
+// at the appropriate location in the tree.
+// 3) Implement the 'contains' method for the Node
+// class.  Contains should accept a 'data' argument
+// and return the Node in the tree with the same value.
+
+/*
+Binary Search Tree - each parent has max two children, and a lower value always
+goes on the left, a greater val on the right.
+*/
+
+class Node2
+ {
+  constructor(data) {
+    this.data = data;
+    this.left = null;
+    this.right = null;
+  }
+
+  // A recursive solution to inserting new data at the proper place
+  insert(data) {
+    if (data < this.data && this.left) {
+      this.left.insert(data);
+    } else if (data < this.data) {
+      this.left = new Node2
+      (data);
+    }
+
+    if (data > this.data && this.right) {
+      this.right.insert(data);
+    } else if (data > this.data) {
+      this.right = new Node2
+      (data);
+    }
+  }
+
+  // A recursive solution for finding a value in a tree
+  contains(data) {
+    if (this.data === data) { // See if the first node contains the data
+      return this;
+    }
+    if (data < this.data && this.left) { // Go down the left side for lesser values
+      return this.left.contains(data);
+    }
+    if (data > this.data && this.right) { // ... and the right for greater
+      return this.right.contains(data);
+    }
+    return null; // if we don't find a match
+  }
+
+}
